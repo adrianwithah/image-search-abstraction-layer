@@ -2,6 +2,7 @@ var express = require("express");
 var https = require("https");
 var app = express();
 var databaseURL = process.env.DATABASE_URL;
+var bingApiKey = process.env.BING_SEARCH_API_KEY1;
 var mongodb = require("mongodb");
 var MongoClient = mongodb.MongoClient;
 var path = require("path");
@@ -14,7 +15,6 @@ app.get("/",function(request, response) {
 });
 
 app.get("/search",function(request, response) {
-	console.log("TEST");
 	var searchQuery = request.query.term;
 	var searchOffset;
 	if (!isNaN(request.query.offset)) {
@@ -49,7 +49,7 @@ app.get("/search",function(request, response) {
 			response.end();
 		});
 	});
-	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",process.env.BING_SEARCH_API_KEY1);
+	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",bingApiKey);
 	bingSearchRequest.end();
 	MongoClient.connect(databaseURL, function(err, db) {
 		if (err) {
