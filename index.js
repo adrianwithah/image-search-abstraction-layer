@@ -2,6 +2,7 @@ var express = require("express");
 var https = require("https");
 var app = express();
 require("dotenv").config();
+console.log(process.env);
 console.log(process.env.DATABASE_URL);
 var databaseURL = process.env.DATABASE_URL;
 var bingApiKey = process.env.BING_SEARCH_API_KEY1;
