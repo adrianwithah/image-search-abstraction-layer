@@ -49,6 +49,7 @@ app.get("/search",function(request, response) {
 			response.end();
 		});
 	});
+	console.log(bingApiKey);
 	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",bingApiKey);
 	bingSearchRequest.end();
 	MongoClient.connect(databaseURL, function(err, db) {
