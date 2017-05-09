@@ -2,8 +2,6 @@ var express = require("express");
 var https = require("https");
 var app = express();
 require("dotenv").config();
-console.log(process.env);
-console.log(process.env.DATABASE_URL);
 var databaseURL = process.env.DATABASE_URL;
 var bingApiKey = process.env.BING_SEARCH_API_KEY1;
 var mongodb = require("mongodb");
@@ -33,11 +31,9 @@ app.get("/search",function(request, response) {
 		searchResponse.setEncoding("utf8");
 		var dataString = "";
 		searchResponse.on("data",function(data) {
-			console.log("searchResponse get data");
 			dataString += data;
 		});
 		searchResponse.on("end",function() {
-			console.log("searchResponse end");
 			var rawDataImagesArray = JSON.parse(dataString).value;
 			var returnArray = [];
 			rawDataImagesArray.forEach(function(imageDetails) {
@@ -52,7 +48,6 @@ app.get("/search",function(request, response) {
 			response.end();
 		});
 	});
-	console.log(bingApiKey);
 	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",bingApiKey);
 	bingSearchRequest.end();
 	MongoClient.connect(databaseURL, function(err, db) {
