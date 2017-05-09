@@ -29,9 +29,11 @@ app.get("/search",function(request, response) {
 		searchResponse.setEncoding("utf8");
 		var dataString = "";
 		searchResponse.on("data",function(data) {
+			console.log("searchResponse get data");
 			dataString += data;
 		});
 		searchResponse.on("end",function() {
+			console.log("searchResponse end");
 			var rawDataImagesArray = JSON.parse(dataString).value;
 			var returnArray = [];
 			rawDataImagesArray.forEach(function(imageDetails) {
@@ -46,7 +48,7 @@ app.get("/search",function(request, response) {
 			response.end();
 		});
 	});
-	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",process.env.BING_SEARCH_API_KEY2);
+	bingSearchRequest.setHeader("Ocp-Apim-Subscription-Key",process.env.BING_SEARCH_API_KEY1);
 	bingSearchRequest.end();
 	MongoClient.connect(databaseURL, function(err, db) {
 		if (err) {
