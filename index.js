@@ -14,6 +14,7 @@ app.get("/",function(request, response) {
 });
 
 app.get("/search",function(request, response) {
+	console.log("TEST");
 	var searchQuery = request.query.term;
 	var searchOffset;
 	if (!isNaN(request.query.offset)) {
