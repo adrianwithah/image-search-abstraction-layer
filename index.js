@@ -1,12 +1,12 @@
 var express = require("express");
 var https = require("https");
 var app = express();
+require("dotenv").config();
 var databaseURL = process.env.DATABASE_URL;
 var bingApiKey = process.env.BING_SEARCH_API_KEY1;
 var mongodb = require("mongodb");
 var MongoClient = mongodb.MongoClient;
 var path = require("path");
-require("dotenv").config();
 
 app.set("views",path.join(__dirname,"views","pages"));
 app.set("view engine","ejs");
